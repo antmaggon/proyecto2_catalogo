@@ -2,32 +2,32 @@
 proyecto de lopez, sergio y toni, de la asignatura de proyectos de 2ºDAW
 
 🧑‍💻 LOPEZ: Estructura base + Formulario (HTML + JS básico)
-
-👉 Equivalente a “Miembro 1” del enunciado, con un poco más de alcance en la visualización inicial.
-
-Tareas principales:
-
-Crear la estructura general de la página (index.html), secciones y etiquetas semánticas.
-
-Implementar el formulario para añadir películas/series:
-
-Campos (título, director, año, género, valoración).
-
-Lógica en formulario.js para capturar datos y agregarlos al catálogo.
-
-Generar la visualización inicial de las tarjetas cuando se añaden elementos.
-
-Contador de películas/series en el catálogo.
-
-Subir imágenes o assets si se usan.
-
-Archivos involucrados:
-
-index.html
-
-js/formulario.js
-
-Parte de js/peliculas.js
+  
+  👉 Equivalente a “Miembro 1” del enunciado, con un poco más de alcance en la visualización inicial.
+  
+  Tareas principales:
+  
+    Crear la estructura general de la página (index.html), secciones y etiquetas semánticas.
+    
+    Implementar el formulario para añadir películas/series:
+    
+    Campos (título, director, año, género, valoración).
+    
+    Lógica en formulario.js para capturar datos y agregarlos al catálogo.
+    
+    Generar la visualización inicial de las tarjetas cuando se añaden elementos.
+    
+    Contador de películas/series en el catálogo.
+    
+    Subir imágenes o assets si se usan.
+  
+  Archivos involucrados:
+  
+    index.html
+    
+    js/formulario.js
+    
+    Parte de js/peliculas.js
 
 ✅ Ideal para alguien con buenas bases de HTML y DOM.
 
