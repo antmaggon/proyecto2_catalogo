@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Películas / Series</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Catálogo de Películas y Series</h1>
+  </header>
+
+  <main>
+    <form id="formulario">
+        <div>
+            <label>Titulo
+                <input type="text" id="titulo" required />
+            </label>
+        </div>
+
+        <div>
+            <label>Director
+                <input type="text" id="director" required />
+            </label>
+        </div>
+
+        <div>
+            <label>Año
+                <input type="number" id="ano" required  />
+            </label>
+        </div>
+        <div>
+
+            <label>Genero
+                <input type="text" id="genero" required />
+            </label>
+        </div>
+
+        <div>
+        <label>Valoracion 
+          <input type="number" id="valoracion" min="1" max="10" required />
+        </label>
+        </div>
+
+        <button type="submit">Agregar</button>
+    </form>
+
+   
+  </main>
+</body>
+</html>
