@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catálogo de Películas / Series</title>
-  <link rel="stylesheet" href="styles.css" />
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Catálogo de Películas / Series</title>
+ <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Catálogo de Películas y Series</h1>
-  </header>
+ <header>
+   <h1>Catálogo de Películas y Series</h1>
+ </header>
 
-  <main>
-    <form id="formulario">
-        <div>
-            <label>Titulo
-                <input type="text" id="titulo" required />
-            </label>
-        </div>
 
-        <div>
-            <label>Director
-                <input type="text" id="director" required />
-            </label>
-        </div>
+   <section id="seccion-formulario">
+     <h2>Agregar nueva película o serie</h2>
 
-        <div>
-            <label>Año
-                <input type="number" id="ano" required  />
-            </label>
-        </div>
-        <div>
 
-            <label>Genero
-                <input type="text" id="genero" required />
-            </label>
-        </div>
+     <form id="formulario">
+       <div>
+         <label for="titulo">Título</label>
+         <input type="text" id="titulo" name="titulo" required>
+       </div>
 
-        <div>
-        <label>Valoracion 
-          <input type="number" id="valoracion" min="1" max="10" required />
-        </label>
-        </div>
 
-        <button type="submit">Agregar</button>
-    </form>
+       <div>
+         <label for="director">Director</label>
+         <input type="text" id="director" name="director" required>
+       </div>
 
-   
-  </main>
+
+       <div>
+         <label for="anio">Año:</label>
+         <input type="number" id="anio" name="anio" min="1888" required>
+       </div>
+
+
+       <div>
+         <label for="genero">Genero</label>
+         <select id="genero" name="genero" required>
+           <option value="">Seleccionar</option>
+           <option value="Acción">Acción</option>
+           <option value="Comedia">Comedia</option>
+           <option value="Drama">Drama</option>
+           <option value="Ciencia Ficción">Ciencia Ficción</option>
+           <option value="Terror">Terror</option>
+         </select>
+       </div>
+
+
+       <div>
+         <label for="valoracion">Valoración </label>
+         <input type="number" id="valoracion" name="valoracion" min="1" max="10" required>
+       </div>
+
+
+       <button type="submit">Agregar al catálogo</button>
+
+
+       <section id="seccion-catalogo">
+     <h2> Catálogo de Peliculas / Series</h2>
+     <p>Total de películas/series: <span id="contador">0</span></p>
+     </form>
+   </section>
+
+
+
+
+ 
+
+
+ <script src="formulario.js"></script>
 </body>
 </html>
