@@ -1,9 +1,13 @@
-// peliculas.js
+// js/peliculas.js
 
 // Arreglo para almacenar las películas/series
 export const catalogo = [];
 
-// Función para crear una tarjeta de película
+/**
+ * Crea una tarjeta HTML para mostrar una película o serie
+ * @param {Object} pelicula - Objeto con los datos de la película
+ * @returns {HTMLElement} Elemento <div> con el contenido de la tarjeta
+ */
 export function crearTarjeta(pelicula) {
   const tarjeta = document.createElement("div");
   tarjeta.classList.add("tarjeta");

@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Catálogo de Películas / Series</title>
- <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Películas / Series</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
- <header>
-   <h1>Catálogo de Películas y Series</h1>
- </header>
+  <header>
+    <h1>Catálogo de Películas y Series</h1>
+  </header>
 
+  <main>
 
-   <section id="seccion-formulario">
-     <h2>Agregar nueva película o serie</h2>
+    <section id="seccion-formulario">
+      <h2>Agregar nueva película o serie</h2>
 
+      <form id="formulario">
+        <div class="campo">
+          <label for="titulo">🎬 Título</label>
+          <input type="text" id="titulo" name="titulo" placeholder="Ej: Inception" required />
+        </div>
 
-     <form id="formulario">
-       <div>
-         <label for="titulo">Título</label>
-         <input type="text" id="titulo" name="titulo" required>
-       </div>
+        <div class="campo">
+          <label for="director">🎞️ Director</label>
+          <input type="text" id="director" name="director" placeholder="Ej: Christopher Nolan" required />
+        </div>
 
+        <div class="campo">
+          <label for="anio">📅 Año</label>
+          <input type="number" id="anio" name="anio" min="1800" placeholder="Ej: 2010" required />
+        </div>
 
-       <div>
-         <label for="director">Director</label>
-         <input type="text" id="director" name="director" required>
-       </div>
+        <div class="campo">
+          <label for="genero">🎭 Género</label>
+          <select id="genero" name="genero" required>
+            <option value="">Seleccionar</option>
+            <option value="Acción">Acción</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Drama">Drama</option>
+            <option value="Ciencia Ficción">Ciencia Ficción</option>
+            <option value="Terror">Terror</option>
+          </select>
+        </div>
 
+        <div class="campo">
+          <label for="valoracion">⭐ Valoración</label>
+          <input type="number" id="valoracion" name="valoracion" min="1" max="10" placeholder="Del 1 al 10" required />
+        </div>
 
-       <div>
-         <label for="anio">Año:</label>
-         <input type="number" id="anio" name="anio" min="1800" required>
-       </div>
+        <button type="submit" class="btn-agregar">Agregar al catálogo</button>
+      </form>
+    </section>
+    <section id="seccion-catalogo">
+      <h2>Catálogo de Películas / Series</h2>
+      <p>Total de películas/series: <span id="contador">0</span></p>
 
-
-       <div>
-         <label for="genero">Genero</label>
-         <select id="genero" name="genero" required>
-           <option value="">Seleccionar</option>
-           <option value="Acción">Acción</option>
-           <option value="Comedia">Comedia</option>
-           <option value="Drama">Drama</option>
-           <option value="Ciencia Ficción">Ciencia Ficción</option>
-           <option value="Terror">Terror</option>
-         </select>
-       </div>
-
-
-       <div>
-         <label for="valoracion">Valoración </label>
-         <input type="number" id="valoracion" name="valoracion" min="1" max="10" required>
-       </div>
-
-
-       <button type="submit">Agregar al catálogo</button>
-
-
-       <section id="seccion-catalogo">
-     <h2> Catálogo de Peliculas / Series</h2>
-     <p>Total de películas/series: <span id="contador">0</span></p>
-     </form>
-   </section>
-
-
-
-
+      <div id="catalogo" class="contenedor-catalogo">
  
+        <div class="tarjeta">
+          <h3>Ejemplo: Inception</h3>
+          <p><strong>Director:</strong> Christopher Nolan</p>
+          <p><strong>Año:</strong> 2010</p>
+          <p><strong>Género:</strong> Ciencia Ficción</p>
+          <p><strong>Valoración:</strong> ⭐ 9/10</p>
+        </div>
 
+        <div class="tarjeta">
+          <h3>Ejemplo: The Office</h3>
+          <p><strong>Director:</strong> Greg Daniels</p>
+          <p><strong>Año:</strong> 2005</p>
+          <p><strong>Género:</strong> Comedia</p>
+          <p><strong>Valoración:</strong> ⭐ 8/10</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
- <script src="formulario.js"></script>
+  <footer>
+    <p>© 2025 Catálogo de Películas y Series — Desarrollado por <strong>LOPEZ</strong></p>
+  </footer>
+
+  <script type="module" src="js/formulario.js"></script>
 </body>
 </html>
