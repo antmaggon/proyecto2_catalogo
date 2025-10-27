@@ -9,7 +9,8 @@
 
 <body>
   <header>
-    <h1>Catálogo de Películas y Series</h1>
+    <h1>🎥 Catálogo de Películas y Series</h1>
+
   </header>
 
   <main>
@@ -18,22 +19,22 @@
       <h2>Agregar nueva película o serie</h2>
 
       <form id="formulario">
-        <div class="campo">
-          <label for="titulo"> Título</label>
+        <div class="campo1">
+          <label for="titulo">Título</label>
           <input type="text" id="titulo" name="titulo"  required />
         </div>
 
-        <div class="campo">
-          <label for="director">Director</label>
+        <div class="campo2">
+          <label for="director"> Director</label>
           <input type="text" id="director" name="director"  required />
         </div>
 
-        <div class="campo">
+        <div class="campo3">
           <label for="anio"> Año</label>
           <input type="number" id="anio" name="anio" min="1800" required />
         </div>
 
-        <div class="campo">
+        <div class="campo4">
           <label for="genero"> Género</label>
           <select id="genero" name="genero" required>
             <option value="">Seleccionar</option>
@@ -45,25 +46,25 @@
           </select>
         </div>
 
-        <div class="campo">
-          <label for="valoracion">Valoración</label>
+        <div class="campo5">
+          <label for="valoracion"> Valoración</label>
           <input type="number" id="valoracion" name="valoracion" min="1" max="10" required />
         </div>
 
         <button type="submit" class="btn-agregar">Agregar al catálogo</button>
       </form>
     </section>
+
+
     <section id="seccion-catalogo">
       <h2>Catálogo de Películas / Series</h2>
       <p>Total de películas/series: <span id="contador">0</span></p>
 
       <div id="catalogo" class="contenedor-catalogo"></div>
- 
-
     </section>
   </main>
 
-  <script  src="js/peliculas.js"></script>
 
+  <script type="module" src="js/formulario.js"></script>
 </body>
 </html>
