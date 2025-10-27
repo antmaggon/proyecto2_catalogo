@@ -1,41 +1,47 @@
-// ===============================
-// formulario.js
-// ===============================
+// js/formulario.js
+import { catalogo, crearTarjeta } from "./peliculas.js";
 
-// Seleccionamos el formulario del DOM
-const form = document.getElementById("formulario");
+document.addEventListener("DOMContentLoaded", () => {
+  const formulario = document.getElementById("formulario");
+  const catalogoDiv = document.getElementById("catalogo");
+  const contador = document.getElementById("contador");
 
-// Escuchamos el evento 'submit'
-form.addEventListener("submit", function (event) {
-  event.preventDefault(); // Evita que se recargue la página
+  // Escuchar envío del formulario
+  formulario.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  // Capturamos los valores del formulario
-  const titulo = document.getElementById("titulo").value.trim();
-  const director = document.getElementById("director").value.trim();
-  const anio = document.getElementById("anio").value.trim();
-  const genero = document.getElementById("genero").value;
-  const valoracion = document.getElementById("valoracion").value.trim();
+    // Capturar datos del formulario
+    const nuevaPelicula = {
+      titulo: document.getElementById("titulo").value.trim(),
+      director: document.getElementById("director").value.trim(),
+      anio: document.getElementById("anio").value.trim(),
+      genero: document.getElementById("genero").value,
+      valoracion: document.getElementById("valoracion").value.trim(),
+    };
 
-  // Validación básica
-  if (!titulo || !director || !anio || !genero || !valoracion) {
-	alert("Por favor, completa todos los campos.");
-	return;
-  }
+    // Validar campos
+    if (
+      !nuevaPelicula.titulo ||
+      !nuevaPelicula.director ||
+      !nuevaPelicula.anio ||
+      !nuevaPelicula.genero ||
+      !nuevaPelicula.valoracion
+    ) {
+      alert("Por favor completa todos los campos antes de agregar la película.");
+      return;
+    }
 
-  // Creamos el objeto de la nueva película
-  const nuevaPelicula = {
-	titulo,
-	director,
-	anio,
-	genero,
-	valoracion
-  };
+    // Agregar al catálogo
+    catalogo.push(nuevaPelicula);
 
-  // Agregamos la película al catálogo (función definida en peliculas.js)
-  agregarPelicula(nuevaPelicula);
+    // Crear y mostrar tarjeta
+    const tarjeta = crearTarjeta(nuevaPelicula);
+    catalogoDiv.appendChild(tarjeta);
 
-  // Limpiamos el formulario
-  form.reset();
+    // Actualizar contador
+    contador.textContent = catalogo.length;
+
+    // Limpiar formulario
+    formulario.reset();
+  });
 });
-
-
