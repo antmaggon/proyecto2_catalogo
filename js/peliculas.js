@@ -45,4 +45,3 @@ export function renderizarCatalogo() {
   // Actualizar contador dinámico
   contador.textContent = catalogo.length;
 }
-
