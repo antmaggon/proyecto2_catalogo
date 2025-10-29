@@ -1,47 +1,51 @@
 // js/formulario.js
-import { catalogo, crearTarjeta } from "./peliculas.js";
+import { catalogo, renderizarCatalogo } from "./peliculas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formulario");
-  const catalogoDiv = document.getElementById("catalogo");
-  const contador = document.getElementById("contador");
 
-  // Escuchar envío del formulario
   formulario.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Capturar datos del formulario
-    const nuevaPelicula = {
-      titulo: document.getElementById("titulo").value.trim(),
-      director: document.getElementById("director").value.trim(),
-      anio: document.getElementById("anio").value.trim(),
-      genero: document.getElementById("genero").value,
-      valoracion: document.getElementById("valoracion").value.trim(),
-    };
+    // Captura de datos
+    const titulo = document.getElementById("titulo").value.trim();
+    const director = document.getElementById("director").value.trim();
+    const anio = document.getElementById("anio").value.trim();
+    const genero = document.getElementById("genero").value;
+    const valoracion = document.getElementById("valoracion").value.trim();
+    const archivoImagen = document.getElementById("imagen").files[0];
 
-    // Validar campos
-    if (
-      !nuevaPelicula.titulo ||
-      !nuevaPelicula.director ||
-      !nuevaPelicula.anio ||
-      !nuevaPelicula.genero ||
-      !nuevaPelicula.valoracion
-    ) {
+    // Validación básica
+    if (!titulo || !director || !anio || !genero || !valoracion) {
       alert("Por favor completa todos los campos antes de agregar la película.");
       return;
     }
 
-    // Agregar al catálogo
-    catalogo.push(nuevaPelicula);
+    // Función interna para agregar la película al catálogo
+    function agregarPelicula(imagenBase64) {
+      const nuevaPelicula = {
+        titulo,
+        director,
+        anio,
+        genero,
+        valoracion,
+        imagen: imagenBase64 || null,
+      };
 
-    // Crear y mostrar tarjeta
-    const tarjeta = crearTarjeta(nuevaPelicula);
-    catalogoDiv.appendChild(tarjeta);
+      catalogo.push(nuevaPelicula);
+      renderizarCatalogo();
+      formulario.reset();
+    }
 
-    // Actualizar contador
-    contador.textContent = catalogo.length;
-
-    // Limpiar formulario
-    formulario.reset();
+    // Leer imagen si existe
+    if (archivoImagen) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        agregarPelicula(event.target.result);
+      };
+      reader.readAsDataURL(archivoImagen);
+    } else {
+      agregarPelicula(null);
+    }
   });
 });
