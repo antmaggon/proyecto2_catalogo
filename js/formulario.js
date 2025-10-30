@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         director,
         anio,
         genero,
-        valoracion,
+        valoracion: Number(valoracion),
         imagen: imagenBase64 || null,
       };
 

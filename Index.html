@@ -15,6 +15,34 @@
 
   <main>
 
+    <section id="seccion-busqueda">
+      <h2>Buscar</h2>
+      <label for="busqueda">Buscar por título</label>
+      <input type="text" id="busqueda" name="busqueda" placeholder="Escribe para buscar..." autocomplete="off" />
+    </section>
+
+    <section id="seccion-filtros">
+      <h2>Filtros</h2>
+      <div class="filtros-grid">
+        <div class="filtro">
+          <label for="filtro-genero">Género</label>
+          <select id="filtro-genero" name="filtro-genero">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+        <div class="filtro">
+          <label for="filtro-director">Director</label>
+          <select id="filtro-director" name="filtro-director">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <button id="btn-mejor-valoradas" type="button">Ver mejor valoradas</button>
+        <button id="btn-limpiar-filtros" type="button" style="margin-left:8px">Limpiar Filtros</button>
+      </div>
+    </section>
+
     <section id="seccion-formulario">
       <h2>Agregar nueva película o serie</h2>
 
@@ -71,5 +99,6 @@
 
 
   <script type="module" src="js/formulario.js"></script>
+  <script type="module" src="js/filtros.js"></script>
 </body>
 </html>
