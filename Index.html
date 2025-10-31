@@ -4,50 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Catálogo de Películas / Series</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
   <header>
-    <h1>Catálogo de Películas y Series</h1>
+    <h1>🎥 Catálogo de Películas y Series</h1>
+
   </header>
 
   <main>
-    <form id="formulario">
-        <div>
-            <label>Titulo
-                <input type="text" id="titulo" required />
-            </label>
+
+    <section id="seccion-busqueda">
+      <h2>Buscar</h2>
+      <label for="busqueda">Buscar por título</label>
+      <input type="text" id="busqueda" name="busqueda" placeholder="Escribe para buscar..." autocomplete="off" />
+    </section>
+
+    <section id="seccion-filtros">
+      <h2>Filtros</h2>
+      <div class="filtros-grid">
+        <div class="filtro">
+          <label for="filtro-genero">Género</label>
+          <select id="filtro-genero" name="filtro-genero">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+        <div class="filtro">
+          <label for="filtro-director">Director</label>
+          <select id="filtro-director" name="filtro-director">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <button id="btn-mejor-valoradas" type="button">Ver mejor valoradas</button>
+        <button id="btn-limpiar-filtros" type="button" style="margin-left:8px">Limpiar Filtros</button>
+      </div>
+    </section>
+
+    <section id="seccion-formulario">
+      <h2>Agregar nueva película o serie</h2>
+
+      <form id="formulario">
+        <div class="campo1">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo"  required />
         </div>
 
-        <div>
-            <label>Director
-                <input type="text" id="director" required />
-            </label>
+        <div class="campo2">
+          <label for="director"> Director</label>
+          <input type="text" id="director" name="director"  required />
         </div>
 
-        <div>
-            <label>Año
-                <input type="number" id="ano" required  />
-            </label>
-        </div>
-        <div>
-
-            <label>Genero
-                <input type="text" id="genero" required />
-            </label>
+        <div class="campo3">
+          <label for="anio"> Año</label>
+          <input type="number" id="anio" name="anio" min="1800" required />
         </div>
 
-        <div>
-        <label>Valoracion 
-          <input type="number" id="valoracion" min="1" max="10" required />
-        </label>
+        <div class="campo4">
+          <label for="genero"> Género</label>
+          <select id="genero" name="genero" required>
+            <option value="">Seleccionar</option>
+            <option value="Acción">Acción</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Drama">Drama</option>
+            <option value="Ciencia Ficción">Ciencia Ficción</option>
+            <option value="Terror">Terror</option>
+          </select>
         </div>
 
-        <button type="submit">Agregar</button>
-    </form>
+        <div class="campo5">
+          <label for="valoracion"> Valoración</label>
+          <input type="number" id="valoracion" name="valoracion" min="1" max="10" required />
+        </div>
 
-    <img>
-    
+        <button type="submit" class="btn-agregar">Agregar al catálogo</button>
+      </form>
+    </section>
+
+        <div class="campo6">
+            <label for="imagen">Imagen (opcional)</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" />
+        </div>
+       
+
+    <section id="seccion-catalogo">
+      <h2>Catálogo de Películas / Series</h2>
+      <p>Total de películas/series: <span id="contador">0</span></p>
+
+      <div id="catalogo" class="contenedor-catalogo"></div>
+    </section>
   </main>
+
+
+  <script type="module" src="js/formulario.js"></script>
+  <script type="module" src="js/filtros.js"></script>
 </body>
 </html>
