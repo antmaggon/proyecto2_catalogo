@@ -1,51 +1,84 @@
-// js/formulario.js
-import { catalogo, renderizarCatalogo } from "./peliculas.js";
+import {
+  agregarPelicula,
+  actualizarPelicula,
+  cargarDesdeStorage,
+} from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formulario");
+  const inputImagen = document.getElementById("imagen");
 
-  formulario.addEventListener("submit", (e) => {
+  cargarDesdeStorage();
+
+  formulario.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Captura de datos
-    const titulo = document.getElementById("titulo").value.trim();
-    const director = document.getElementById("director").value.trim();
-    const anio = document.getElementById("anio").value.trim();
-    const genero = document.getElementById("genero").value;
-    const valoracion = document.getElementById("valoracion").value.trim();
-    const archivoImagen = document.getElementById("imagen").files[0];
+    const titulo = formulario.titulo.value.trim();
+    const director = formulario.director.value.trim();
+    const anio = formulario.anio.value.trim();
+    const genero = formulario.genero.value;
+    const valoracion = formulario.valoracion.value.trim();
+    const archivoImagen = inputImagen.files[0];
 
-    // Validación básica
     if (!titulo || !director || !anio || !genero || !valoracion) {
       alert("Por favor completa todos los campos antes de agregar la película.");
       return;
     }
 
-    // Función interna para agregar la película al catálogo
-    function agregarPelicula(imagenBase64) {
-      const nuevaPelicula = {
-        titulo,
-        director,
-        anio,
-        genero,
-        valoracion: Number(valoracion),
-        imagen: imagenBase64 || null,
-      };
+    const imagenBase64 = archivoImagen
+      ? await leerImagenBase64(archivoImagen)
+      : null;
 
-      catalogo.push(nuevaPelicula);
-      renderizarCatalogo();
-      formulario.reset();
-    }
+    const nuevaPelicula = {
+      titulo,
+      director,
+      anio: Number(anio),
+      genero,
+      valoracion: Number(valoracion),
+      imagen: imagenBase64,
+    };
 
-    // Leer imagen si existe
-    if (archivoImagen) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        agregarPelicula(event.target.result);
-      };
-      reader.readAsDataURL(archivoImagen);
+    const editIndex = formulario.dataset.editIndex;
+
+    if (editIndex !== undefined && editIndex !== "") {
+      actualizarPelicula(parseInt(editIndex), nuevaPelicula);
+      delete formulario.dataset.editIndex;
+
+      const boton = formulario.querySelector(".btn-agregar");
+      boton.textContent = "Agregar al catálogo";
+      boton.classList.remove("modo-edicion");
+
+      mostrarMensaje("Película actualizada correctamente ✅", "success");
     } else {
-      agregarPelicula(null);
+
+      agregarPelicula(nuevaPelicula);
+      mostrarMensaje("Película agregada al catálogo 🎬", "success");
     }
+
+    formulario.reset();
   });
 });
+
+function leerImagenBase64(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (event) => resolve(event.target.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+function mostrarMensaje(texto, tipo = "info") {
+  let mensaje = document.createElement("div");
+  mensaje.textContent = texto;
+  mensaje.className = `mensaje-flotante ${tipo}`;
+  document.body.appendChild(mensaje);
+
+  setTimeout(() => {
+    mensaje.classList.add("visible");
+  }, 50);
+
+  setTimeout(() => {
+    mensaje.classList.remove("visible");
+    setTimeout(() => mensaje.remove(), 300);
+  }, 2000);
+}

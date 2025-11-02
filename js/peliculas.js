@@ -1,14 +1,8 @@
-// js/peliculas.js
+import { eliminarPelicula } from "./storage.js";
 
-// Arreglo para almacenar las películas/series
 export const catalogo = [];
 
-/**
- * Crea una tarjeta HTML para una película o serie
- * @param {Object} pelicula - Objeto con datos: título, director, año, género, valoración, imagen (opcional)
- * @returns {HTMLElement} Tarjeta renderizada
- */
-export function crearTarjeta(pelicula) {
+export function crearTarjeta(pelicula, index) {
   const tarjeta = document.createElement("div");
   tarjeta.classList.add("tarjeta");
 
@@ -21,27 +15,68 @@ export function crearTarjeta(pelicula) {
     <p><strong>Año:</strong> ${pelicula.anio}</p>
     <p><strong>Género:</strong> ${pelicula.genero}</p>
     <p><strong>Valoración:</strong> ⭐ ${pelicula.valoracion}/10</p>
+
+    <div class="acciones">
+      <button class="btn-editar" data-index="${index}">✏️ Editar</button>
+      <button class="btn-eliminar" data-index="${index}">🗑️ Eliminar</button>
+    </div>
   `;
 
   return tarjeta;
 }
 
-/**
- * Renderiza todo el catálogo en la página
- */
+
 export function renderizarCatalogo() {
   const contenedor = document.getElementById("catalogo");
   const contador = document.getElementById("contador");
-
-  // Limpiar contenido previo
   contenedor.innerHTML = "";
 
-  // Agregar cada película como tarjeta
-  catalogo.forEach((pelicula) => {
-    const tarjeta = crearTarjeta(pelicula);
+  catalogo.forEach((pelicula, index) => {
+    const tarjeta = crearTarjeta(pelicula, index);
     contenedor.appendChild(tarjeta);
   });
 
-  // Actualizar contador dinámico
   contador.textContent = catalogo.length;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("catalogo");
+
+  contenedor.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    const index = parseInt(btn.dataset.index);
+
+    if (btn.classList.contains("btn-eliminar")) {
+      if (confirm("¿Seguro que deseas eliminar esta película?")) {
+        eliminarPelicula(index);
+      }
+    } else if (btn.classList.contains("btn-editar")) {
+      cargarPeliculaEnFormulario(index);
+    }
+  });
+});
+
+
+function cargarPeliculaEnFormulario(index) {
+  const pelicula = catalogo[index];
+  if (!pelicula) return;
+
+  const formulario = document.getElementById("formulario");
+  formulario.titulo.value = pelicula.titulo;
+  formulario.director.value = pelicula.director;
+  formulario.anio.value = pelicula.anio;
+  formulario.genero.value = pelicula.genero;
+  formulario.valoracion.value = pelicula.valoracion;
+
+  formulario.dataset.editIndex = index;
+
+  const boton = formulario.querySelector(".btn-agregar");
+  boton.textContent = "💾 Guardar cambios";
+  boton.classList.add("modo-edicion");
+
+  formulario.classList.add("editando");
+  
+  formulario.scrollIntoView({ behavior: "smooth", block: "start" });
 }
