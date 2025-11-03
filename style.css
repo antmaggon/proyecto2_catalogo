@@ -1,38 +1,99 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #f4f4f4;
+}
+
+header {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(90deg, #e50914, #b81d24);
+  color: white;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 1rem;
+}
+
+h2 {
+  border-left: 4px solid #e50914;
+  padding-left: 8px;
+}
+
+form {
+  display: grid;
+  gap: 0.8rem;
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+input, select, button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+}
+
+input, select {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+  background-color: #e50914;
+  color: white;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #b81d24;
+}
+
+.contenedor-catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .tarjeta {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s ease;
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .tarjeta:hover {
   transform: scale(1.03);
+  box-shadow: 0 0 15px #e50914aa;
 }
 
 .portada {
   width: 100%;
-  height: auto;
+  height: 300px;
+  object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 10px;
+}
+
+.sin-imagen {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  border-radius: 8px;
+  color: #aaa;
 }
 
 .acciones {
+  margin-top: 10px;
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.btn-editar, .btn-eliminar {
-  padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  color: white;
+  justify-content: space-around;
 }
 
 .btn-editar {
@@ -40,7 +101,7 @@
 }
 
 .btn-eliminar {
-  background-color: #dc3545;
+  background-color: #d32f2f;
 }
 
 .btn-editar:hover {
@@ -48,13 +109,38 @@
 }
 
 .btn-eliminar:hover {
-  background-color: #a71d2a;
+  background-color: #b71c1c;
 }
 
 @media (max-width: 600px) {
-  #catalogo {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .portada, .sin-imagen {
+    height: 220px;
   }
+}
+
+.mensaje-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.mensaje-flotante.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mensaje-flotante.success {
+  background: #2e7d32;
+}
+
+.mensaje-flotante.error {
+  background: #c62828;
 }

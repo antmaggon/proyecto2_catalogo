@@ -1,14 +1,8 @@
-// js/peliculas.js
+import { eliminarPelicula } from "./storage.js";
 
-// Arreglo para almacenar las películas/series
 export const catalogo = [];
 
-/**
- * Crea una tarjeta HTML para una película o serie
- * @param {Object} pelicula - Objeto con datos: título, director, año, género, valoración, imagen (opcional)
- * @returns {HTMLElement} Tarjeta renderizada
- */
-export function crearTarjeta(pelicula) {
+export function crearTarjeta(pelicula, index) {
   const tarjeta = document.createElement("div");
   tarjeta.classList.add("tarjeta");
 
@@ -21,109 +15,68 @@ export function crearTarjeta(pelicula) {
     <p><strong>Año:</strong> ${pelicula.anio}</p>
     <p><strong>Género:</strong> ${pelicula.genero}</p>
     <p><strong>Valoración:</strong> ⭐ ${pelicula.valoracion}/10</p>
+
+    <div class="acciones">
+      <button class="btn-editar" data-index="${index}">✏️ Editar</button>
+      <button class="btn-eliminar" data-index="${index}">🗑️ Eliminar</button>
+    </div>
   `;
-
-  const botones = document.createElement("div");
-  botones.classList.add("acciones");
-
-  const btnEditar = document.createElement("button");
-  btnEditar.textContent = "Editar";
-  btnEditar.classList.add("btn-editar");
-
-  const btnEliminar = document.createElement("button");
-  btnEliminar.textContent = "Eliminar";
-  btnEliminar.classList.add("btn-eliminar");
-
-  // Asignar eventos
-  btnEditar.addEventListener("click", () => editarPelicula(pelicula));
-  btnEliminar.addEventListener("click", () => eliminarPelicula(pelicula));
-
-  botones.appendChild(btnEditar);
-  botones.appendChild(btnEliminar);
-  tarjeta.appendChild(botones);
-
 
   return tarjeta;
 }
 
-/**
- * Renderiza todo el catálogo en la página
- */
+
 export function renderizarCatalogo() {
   const contenedor = document.getElementById("catalogo");
   const contador = document.getElementById("contador");
-
-  // Limpiar contenido previo
   contenedor.innerHTML = "";
 
-  // Agregar cada película como tarjeta
-  catalogo.forEach((pelicula) => {
-    const tarjeta = crearTarjeta(pelicula);
+  catalogo.forEach((pelicula, index) => {
+    const tarjeta = crearTarjeta(pelicula, index);
     contenedor.appendChild(tarjeta);
   });
 
-  // Actualizar contador dinámico
   contador.textContent = catalogo.length;
 }
 
-// --- Función para eliminar una película ---
-export function eliminarPelicula(pelicula) {
-  const index = catalogo.indexOf(pelicula);
-  if (index !== -1) {
-    catalogo.splice(index, 1);
-    guardarEnLocalStorage();
-    renderizarCatalogo();
-  }
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("catalogo");
 
-// --- Función para editar una película ---
-export function editarPelicula(pelicula) {
-  const tituloInput = document.getElementById("titulo");
-  const directorInput = document.getElementById("director");
-  const anioInput = document.getElementById("anio");
-  const generoInput = document.getElementById("genero");
-  const valoracionInput = document.getElementById("valoracion");
+  contenedor.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
 
-  // Cargar datos en formulario
-  tituloInput.value = pelicula.titulo;
-  directorInput.value = pelicula.director;
-  anioInput.value = pelicula.anio;
-  generoInput.value = pelicula.genero;
-  valoracionInput.value = pelicula.valoracion;
+    const index = parseInt(btn.dataset.index);
 
-  // Al guardar, actualizar la película
-  const formulario = document.getElementById("formulario");
-  formulario.onsubmit = function (e) {
-    e.preventDefault();
-    pelicula.titulo = tituloInput.value;
-    pelicula.director = directorInput.value;
-    pelicula.anio = anioInput.value;
-    pelicula.genero = generoInput.value;
-    pelicula.valoracion = valoracionInput.value;
-    guardarEnLocalStorage();
-    renderizarCatalogo();
-
-    formulario.reset();
-    formulario.onsubmit = null; // Restablecer comportamiento original si lo hay
-  };
-}
-
-export function guardarEnLocalStorage() {
-  localStorage.setItem("catalogo", JSON.stringify(catalogo));
-}
-
-export function cargarDesdeLocalStorage() {
-  const datos = localStorage.getItem("catalogo");
-  if (datos) {
-    const array = JSON.parse(datos);
-    catalogo.length = 0;
-    catalogo.push(...array);
-  }
-}
-
-
-// --- Al cargar la página ---
-window.addEventListener("DOMContentLoaded", () => {
-  cargarDesdeLocalStorage();
-  renderizarCatalogo();
+    if (btn.classList.contains("btn-eliminar")) {
+      if (confirm("¿Seguro que deseas eliminar esta película?")) {
+        eliminarPelicula(index);
+      }
+    } else if (btn.classList.contains("btn-editar")) {
+      cargarPeliculaEnFormulario(index);
+    }
+  });
 });
+
+
+function cargarPeliculaEnFormulario(index) {
+  const pelicula = catalogo[index];
+  if (!pelicula) return;
+
+  const formulario = document.getElementById("formulario");
+  formulario.titulo.value = pelicula.titulo;
+  formulario.director.value = pelicula.director;
+  formulario.anio.value = pelicula.anio;
+  formulario.genero.value = pelicula.genero;
+  formulario.valoracion.value = pelicula.valoracion;
+
+  formulario.dataset.editIndex = index;
+
+  const boton = formulario.querySelector(".btn-agregar");
+  boton.textContent = "💾 Guardar cambios";
+  boton.classList.add("modo-edicion");
+
+  formulario.classList.add("editando");
+  
+  formulario.scrollIntoView({ behavior: "smooth", block: "start" });
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,11 +11,9 @@
 <body>
   <header>
     <h1>🎥 Catálogo de Películas y Series</h1>
-
   </header>
 
   <main>
-
     <section id="seccion-busqueda">
       <h2>Buscar</h2>
       <label for="busqueda">Buscar por título</label>
@@ -49,21 +48,21 @@
       <form id="formulario">
         <div class="campo1">
           <label for="titulo">Título</label>
-          <input type="text" id="titulo" name="titulo"  required />
+          <input type="text" id="titulo" name="titulo" required />
         </div>
 
         <div class="campo2">
-          <label for="director"> Director</label>
-          <input type="text" id="director" name="director"  required />
+          <label for="director">Director</label>
+          <input type="text" id="director" name="director" required />
         </div>
 
         <div class="campo3">
-          <label for="anio"> Año</label>
+          <label for="anio">Año</label>
           <input type="number" id="anio" name="anio" min="1800" required />
         </div>
 
         <div class="campo4">
-          <label for="genero"> Género</label>
+          <label for="genero">Género</label>
           <select id="genero" name="genero" required>
             <option value="">Seleccionar</option>
             <option value="Acción">Acción</option>
@@ -75,19 +74,18 @@
         </div>
 
         <div class="campo5">
-          <label for="valoracion"> Valoración</label>
+          <label for="valoracion">Valoración</label>
           <input type="number" id="valoracion" name="valoracion" min="1" max="10" required />
+        </div>
+
+        <div class="campo6">
+          <label for="imagen">Imagen (opcional)</label>
+          <input type="file" id="imagen" name="imagen" accept="image/*" />
         </div>
 
         <button type="submit" class="btn-agregar">Agregar al catálogo</button>
       </form>
     </section>
-
-        <div class="campo6">
-            <label for="imagen">Imagen (opcional)</label>
-            <input type="file" id="imagen" name="imagen" accept="image/*" />
-        </div>
-       
 
     <section id="seccion-catalogo">
       <h2>Catálogo de Películas / Series</h2>
@@ -97,9 +95,9 @@
     </section>
   </main>
 
-
   <script type="module" src="js/formulario.js"></script>
   <script type="module" src="js/filtros.js"></script>
-  <script type="module" src="js/peliculas.js"></script>
+
 </body>
+
 </html>
