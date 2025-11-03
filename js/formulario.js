@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const archivoImagen = inputImagen.files[0];
 
     if (!titulo || !director || !anio || !genero || !valoracion) {
-      alert("Por favor completa todos los campos antes de agregar la película.");
+      alert("Por favor completa todos los campos antes de guardar la película.");
       return;
     }
 
